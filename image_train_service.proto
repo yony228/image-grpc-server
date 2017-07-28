@@ -1,0 +1,21 @@
+syntax = "proto3";
+package example;
+option java_package = "edu.nudt.das.image.grpc";
+option java_outer_classname = "TrainProto";
+option java_multiple_files = true;
+
+service TrainService {
+    rpc DoTrain (TrainRequest) returns (TrainResponse) {};
+}
+
+message TrainRequest {
+    string train_no = 1;
+    int64 train_step = 2;
+    int32 train_test_percent = 3;
+    int32 train_shard_num = 4;
+}
+
+message TrainResponse {
+    string key = 1;
+    string message = 2;
+}
