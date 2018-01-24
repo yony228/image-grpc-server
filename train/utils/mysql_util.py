@@ -36,7 +36,9 @@ def _get_mysql_db():
 # 根据训练号获取分类及其分类名称
 def get_classification(_train_no):
     cur = _get_mysql_db().cursor()
-    sql = 'SELECT t1.train_no,t2.id,t2.classification FROM train_class t1,classifications t2 WHERE t1.train_no="%s" AND t1.class_id=t2.id' % _train_no
+    # sql = 'SELECT t1.train_no,t2.id,t2.classification FROM train_class t1,classifications t2 WHERE t1.train_no="%s" AND t1.class_id=t2.id' % _train_no
+    sql = 'SELECT t1.train_no,t2.id,t2.classification FROM trains t1,r_model_class t3,classifications t2 WHERE t1.train_no="%s" AND t1.model_id=t3.model_id AND t3.class_id=t2.id' % _train_no
+
     cur.execute(sql)
     return cur.fetchall()
 
